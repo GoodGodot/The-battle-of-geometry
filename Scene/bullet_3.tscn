@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmmh85i8n8ame"]
+
+[ext_resource type="Script" uid="uid://bu3k1jp7earrv" path="res://Scene/bullet.gd" id="1_lc8db"]
+[ext_resource type="Texture2D" uid="uid://bbs2cb2untdlb" path="res://pictures/子弹.png" id="2_hx70v"]
+[ext_resource type="AudioStream" uid="uid://dm8bt8fg3eie5" path="res://music/shoot.ogg" id="3_gs1va"]
+[ext_resource type="Script" uid="uid://cye35y77j7kl0" path="res://Scene/line_2d.gd" id="4_lxx2s"]
+
+[sub_resource type="Curve" id="Curve_lc8db"]
+_data = [Vector2(0, 0.662921), 0.0, 0.0, 0, 0, Vector2(0.969957, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lc8db"]
+colors = PackedColorArray(0.41391, 0.347656, 1, 1, 0.964706, 0.964706, 0.964706, 0.592157)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7h5k"]
+size = Vector2(30, 9)
+
+[node name="Bullet3" type="Area2D"]
+script = ExtResource("1_lc8db")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-15, 0, -118, 0)
+width_curve = SubResource("Curve_lc8db")
+gradient = SubResource("Gradient_lc8db")
+script = ExtResource("4_lxx2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1.105, 1.657, 1)
+texture = ExtResource("2_hx70v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_k7h5k")
+
+[node name="free" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(1.5, 0.45)
+
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gs1va")
+volume_db = 5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="free" to="." method="_on_free_screen_exited"]

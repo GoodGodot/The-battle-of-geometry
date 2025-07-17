@@ -1,0 +1,319 @@
+[gd_scene load_steps=20 format=3 uid="uid://biib0tap6phue"]
+
+[ext_resource type="Script" uid="uid://di2kx0xo4hvi3" path="res://Scene/main.gd" id="1_r34rm"]
+[ext_resource type="Shader" uid="uid://8adybg5wlxmr" path="res://shaders/backround.gdshader" id="2_ow1sv"]
+[ext_resource type="PackedScene" uid="uid://b0yvl5pcsbc85" path="res://Scene/player.tscn" id="3_r34rm"]
+[ext_resource type="Script" uid="uid://cal75ptongimk" path="res://Scene/enermy_timer.gd" id="4_2wwxx"]
+[ext_resource type="Script" uid="uid://cxqsi7rsvo5rc" path="res://Scene/boss_timer.gd" id="4_3amdw"]
+[ext_resource type="Script" uid="uid://b3m563xe2ttbp" path="res://Scene/game_over.gd" id="5_3amdw"]
+[ext_resource type="Script" uid="uid://crk661a8j8q3u" path="res://Scene/enermy_2_timer.gd" id="5_75buv"]
+[ext_resource type="AudioStream" uid="uid://dn3i2fkcy0n8r" path="res://music/coin1.ogg" id="6_1xcnr"]
+[ext_resource type="PackedScene" uid="uid://b2afw3n8r5x10" path="res://Scene/ui.tscn" id="9_c2iwn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pt4j"]
+shader = ExtResource("2_ow1sv")
+shader_parameter/resolution = Vector2(600, 400)
+shader_parameter/spiral_color = Color(0, 0.131226, 0.195313, 1)
+shader_parameter/frequency = 3.9
+shader_parameter/speed = 1.0
+shader_parameter/brightness = 4.1
+shader_parameter/balance = 0.5
+shader_parameter/octaves = 5.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ow1sv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ow1sv"]
+bg_color = Color(1, 0.961, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.09375, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Animation" id="Animation_3amdw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../score:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2wwxx"]
+resource_name = "coming"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1xcnr"]
+resource_name = "score"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../score:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1xcnr"]
+_data = {
+&"RESET": SubResource("Animation_3amdw"),
+&"coming": SubResource("Animation_2wwxx"),
+&"score": SubResource("Animation_1xcnr")
+}
+
+[sub_resource type="InputEventKey" id="InputEventKey_1xcnr"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ow1sv"]
+events = [SubResource("InputEventKey_1xcnr")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xcnr"]
+bg_color = Color(0.234, 0.928, 1, 0.867)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_r34rm")
+metadata/_edit_vertical_guides_ = [0.0]
+
+[node name="background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_3pt4j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -38.0
+offset_right = 1176.0
+offset_bottom = 680.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_ow1sv")
+
+[node name="Player" parent="." instance=ExtResource("3_r34rm")]
+position = Vector2(498, 608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="EnermyTimer" type="Timer" parent="."]
+wait_time = 2.0
+script = ExtResource("4_2wwxx")
+
+[node name="Enermy2Timer" type="Timer" parent="."]
+wait_time = 5.0
+script = ExtResource("5_75buv")
+
+[node name="BossTimer" type="Timer" parent="."]
+wait_time = 50.0
+script = ExtResource("4_3amdw")
+
+[node name="Enermy_up" type="Timer" parent="."]
+wait_time = 50.0
+
+[node name="Boss_up" type="Timer" parent="."]
+wait_time = 200.0
+
+[node name="score" type="Label" parent="."]
+offset_right = 1153.0
+offset_bottom = 87.0
+pivot_offset = Vector2(576, 43)
+theme_override_colors/font_color = Color(1, 0.890625, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.347656, 0.984711, 1, 0.686)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 55
+text = "Score:0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="boss_come" type="Label" parent="."]
+offset_top = 78.0
+offset_right = 1153.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.774)
+theme_override_font_sizes/font_size = 66
+theme_override_styles/normal = SubResource("StyleBoxFlat_ow1sv")
+text = "BOSS来袭"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="boss_come"]
+libraries = {
+&"": SubResource("AnimationLibrary_1xcnr")
+}
+
+[node name="wave" type="Label" parent="."]
+offset_left = 828.0
+offset_right = 1154.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0.8125, 0.8125, 0.8125, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.801)
+theme_override_font_sizes/font_size = 52
+text = "波次：1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="back" type="Button" parent="."]
+offset_left = -96.0
+offset_right = -5.0
+offset_bottom = 62.0
+shortcut = SubResource("Shortcut_ow1sv")
+text = "返回"
+
+[node name="esc" type="Label" parent="."]
+offset_right = 195.0
+offset_bottom = 39.0
+text = "Esc返回主界面"
+
+[node name="game_over" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="background" type="Panel" parent="game_over"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.5
+offset_top = -173.0
+offset_right = 321.5
+offset_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1xcnr")
+script = ExtResource("5_3amdw")
+
+[node name="Label" type="Label" parent="game_over/background"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 645.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.289063, 0.450134, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.729)
+theme_override_font_sizes/font_size = 36
+text = "Score:0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="coin" type="Label" parent="game_over/background"]
+process_mode = 3
+layout_mode = 0
+offset_left = 0.5
+offset_top = 48.0
+offset_right = 644.5
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(1, 0.936218, 0.257813, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.729)
+theme_override_font_sizes/font_size = 25
+text = "所获金币为："
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="massage" type="Label" parent="game_over/background"]
+layout_mode = 0
+offset_left = 0.5
+offset_top = 79.0
+offset_right = 644.5
+offset_bottom = 243.0
+theme_override_colors/font_color = Color(0.457031, 0.457031, 0.457031, 1)
+theme_override_font_sizes/font_size = 136
+text = "游戏结束~"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="back" type="Button" parent="game_over/background"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.5
+offset_top = -92.0
+offset_right = 88.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "返回主界面"
+
+[node name="enermy_die" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1xcnr")
+
+[node name="UI" parent="." instance=ExtResource("9_c2iwn")]
+
+[connection signal="timeout" from="EnermyTimer" to="EnermyTimer" method="_on_timeout"]
+[connection signal="timeout" from="Enermy2Timer" to="Enermy2Timer" method="_on_timeout"]
+[connection signal="timeout" from="BossTimer" to="BossTimer" method="_on_timeout"]
+[connection signal="timeout" from="Enermy_up" to="EnermyTimer" method="_on_enermy_up_timeout"]
+[connection signal="timeout" from="Boss_up" to="BossTimer" method="_on_boss_up_timeout"]

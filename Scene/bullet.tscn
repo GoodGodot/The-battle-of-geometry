@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6yxrog28qrrx"]
+
+[ext_resource type="Script" uid="uid://bu3k1jp7earrv" path="res://Scene/bullet.gd" id="1_jm66p"]
+[ext_resource type="Texture2D" uid="uid://bbs2cb2untdlb" path="res://pictures/子弹.png" id="2_sj187"]
+[ext_resource type="AudioStream" uid="uid://dm8bt8fg3eie5" path="res://music/shoot.ogg" id="3_kt36j"]
+[ext_resource type="Script" uid="uid://cye35y77j7kl0" path="res://Scene/line_2d.gd" id="4_sj187"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7h5k"]
+size = Vector2(30, 9)
+
+[sub_resource type="Gradient" id="Gradient_jm66p"]
+colors = PackedColorArray(1, 0.351563, 0, 1, 0.858, 0.273, 1, 0)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_jm66p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1.105, 1.657, 1)
+texture = ExtResource("2_sj187")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_k7h5k")
+
+[node name="free" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(1.5, 0.45)
+
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kt36j")
+volume_db = 5.0
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(28, 0)
+scale = Vector2(2.68693, 1)
+points = PackedVector2Array(-16, 0, -16.0104, 0, -73.3179, 0)
+width = 2.0
+gradient = SubResource("Gradient_jm66p")
+script = ExtResource("4_sj187")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="free" to="." method="_on_free_screen_exited"]

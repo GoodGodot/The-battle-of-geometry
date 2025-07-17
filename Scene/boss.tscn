@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://duufyl65c0oqn"]
+
+[ext_resource type="Script" uid="uid://dxllryqg5qb8y" path="res://Scene/boss.gd" id="1_4jox1"]
+[ext_resource type="Texture2D" uid="uid://bn8utannadpgw" path="res://pictures/boss.png" id="2_xcy4r"]
+[ext_resource type="StyleBox" uid="uid://cngrsl557yw4d" path="res://theme/blood_background.tres" id="3_7o6m2"]
+[ext_resource type="StyleBox" uid="uid://1ufoqlix7gwu" path="res://theme/blood_fill.tres" id="4_jk3ii"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05hnv"]
+size = Vector2(100, 100)
+
+[node name="Boss" type="CharacterBody2D" groups=["Enermys"]]
+script = ExtResource("1_4jox1")
+metadata/_edit_horizontal_guides_ = [-96.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.417153, 0.918116, 1)
+rotation = 1.5708
+texture = ExtResource("2_xcy4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_05hnv")
+
+[node name="blood_process" type="ProgressBar" parent="."]
+offset_left = 90.0
+offset_top = -60.0
+offset_right = 204.0
+offset_bottom = -34.0
+rotation = 1.5708
+theme_override_font_sizes/font_size = 11
+theme_override_styles/background = ExtResource("3_7o6m2")
+theme_override_styles/fill = ExtResource("4_jk3ii")
+value = 100.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 134.0
+offset_top = -41.0
+offset_right = 218.0
+offset_bottom = -2.0
+rotation = 1.57079
+theme_override_colors/font_color = Color(1, 0.029402, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.795)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 5
+text = "BOSS"

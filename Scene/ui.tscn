@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2afw3n8r5x10"]
+
+[ext_resource type="Texture2D" uid="uid://c0d871rsns06c" path="res://pictures/大招.png" id="1_3i1b0"]
+[ext_resource type="Script" uid="uid://bh20qc2kcnylr" path="res://Scene/control.gd" id="1_bpjw8"]
+[ext_resource type="Texture2D" uid="uid://bi555f2yrp8da" path="res://pictures/大招2.png" id="3_lfpiq"]
+[ext_resource type="AudioStream" uid="uid://b4ou18o3hv8ty" path="res://music/boom.mp3" id="3_urowa"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_bpjw8"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_lfpiq"]
+events = [SubResource("InputEventKey_bpjw8")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_lfpiq"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_urowa"]
+events = [SubResource("InputEventKey_lfpiq")]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bpjw8")
+
+[node name="die_all" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1047.0
+offset_top = 433.0
+offset_right = 1151.0
+offset_bottom = 537.0
+focus_mode = 0
+theme_override_icons/icon = ExtResource("1_3i1b0")
+shortcut = SubResource("Shortcut_lfpiq")
+icon = ExtResource("1_3i1b0")
+flat = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="die_all"]
+
+[node name="ColorRect" type="ColorRect" parent="die_all/CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.989
+offset_bottom = 7.12799
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.53125, 1, 0.890137, 1)
+
+[node name="Label" type="Label" parent="die_all/CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 1152.0
+offset_bottom = 622.0
+theme_override_colors/font_color = Color(1, 0.867188, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52549)
+theme_override_font_sizes/font_size = 326
+text = "BOOM!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="num" type="Label" parent="die_all"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = -9.0
+offset_right = 129.0
+offset_bottom = 30.0
+text = "1"
+
+[node name="boom" type="AudioStreamPlayer" parent="die_all"]
+stream = ExtResource("3_urowa")
+
+[node name="sky" type="Button" parent="."]
+layout_mode = 0
+offset_left = 951.0
+offset_top = 537.0
+offset_right = 1055.0
+offset_bottom = 641.0
+focus_mode = 0
+shortcut = SubResource("Shortcut_urowa")
+icon = ExtResource("3_lfpiq")
+flat = true
+
+[node name="num" type="Label" parent="sky"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = -11.0
+offset_right = 131.0
+offset_bottom = 28.0
+text = "1"
+
+[connection signal="pressed" from="die_all" to="." method="_on_die_all_pressed"]
+[connection signal="pressed" from="sky" to="." method="_on_sky_pressed"]

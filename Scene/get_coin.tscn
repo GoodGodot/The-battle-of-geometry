@@ -1,0 +1,160 @@
+[gd_scene load_steps=6 format=3 uid="uid://rh5sd1bdabmb"]
+
+[ext_resource type="Script" uid="uid://tjg85p8ymos2" path="res://Scene/get_coin.gd" id="1_2faf6"]
+
+[sub_resource type="Gradient" id="Gradient_l6gy5"]
+offsets = PackedFloat32Array(0, 0.582915, 1)
+colors = PackedColorArray(0.492188, 0.952393, 1, 1, 0.966431, 0.828125, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ipygl"]
+gradient = SubResource("Gradient_l6gy5")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_o2npx"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_03ups"]
+events = [SubResource("InputEventKey_o2npx")]
+
+[node name="Get_coin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2faf6")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ipygl")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0, 0.507813, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.556863)
+theme_override_font_sizes/font_size = 91
+text = "答题得金币："
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="question" type="Label" parent="."]
+layout_mode = 0
+offset_top = 177.0
+offset_right = 1151.0
+offset_bottom = 324.0
+theme_override_colors/font_color = Color(0.361328, 0.25, 1, 1)
+theme_override_font_sizes/font_size = 76
+text = "1+1=?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="answer" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = 46.0
+offset_right = 295.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "回答"
+alignment = 1
+context_menu_enabled = false
+virtual_keyboard_type = 2
+clear_button_enabled = true
+caret_blink = true
+
+[node name="check" type="Button" parent="."]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 540.0
+offset_right = 674.0
+offset_bottom = 629.0
+shortcut = SubResource("Shortcut_03ups")
+text = "检验答案"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 154.0
+offset_bottom = 87.0
+text = "返回并结账"
+
+[node name="get_coin_value" type="Label" parent="."]
+layout_mode = 0
+offset_left = 895.0
+offset_right = 1132.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(1, 0.890625, 0, 1)
+text = "获得金币数：0 "
+vertical_alignment = 1
+
+[node name="less_coin" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_colors/font_color = Color(1, 0.0898438, 0.0898438, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.619608)
+theme_override_font_sizes/font_size = 156
+text = "时间到，扣金币：10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 280.0
+offset_bottom = 143.0
+text = "选择运算（默认加，减）"
+
+[node name="加" type="CheckButton" parent="." groups=["op"]]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 143.0
+offset_right = 120.0
+offset_bottom = 186.0
+button_pressed = true
+text = "加"
+alignment = 1
+
+[node name="减" type="CheckButton" parent="." groups=["op"]]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 143.0
+offset_right = 225.0
+offset_bottom = 186.0
+text = "减"
+alignment = 1
+
+[node name="乘" type="CheckButton" parent="." groups=["op"]]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 207.0
+offset_right = 120.0
+offset_bottom = 250.0
+text = "乘"
+alignment = 1
+
+[node name="除" type="CheckButton" parent="." groups=["op"]]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 207.0
+offset_right = 225.0
+offset_bottom = 250.0
+text = "除"
+alignment = 1

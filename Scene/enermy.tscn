@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1dmcnuawp8u2"]
+
+[ext_resource type="Texture2D" uid="uid://jtpd2lh7n1hk" path="res://pictures/enermy.png" id="1_ukf0a"]
+[ext_resource type="Script" uid="uid://ciwph1pnb5b6g" path="res://Scene/enermy.gd" id="1_y8w33"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nef2n"]
+bg_color = Color(0.328036, 1, 0.291376, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k3if"]
+bg_color = Color(1, 0.1925, 0.15, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Enermy" type="CharacterBody2D" groups=["Enermys"]]
+script = ExtResource("1_y8w33")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, 0)
+rotation = 1.5708
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_ukf0a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(21, 0, -22, -25, -22, 25)
+
+[node name="eye" type="ColorRect" parent="."]
+offset_left = 7.0
+offset_top = -6.0
+offset_right = 11.0
+offset_bottom = 6.0
+color = Color(0.834683, 0.887958, 1, 1)
+
+[node name="blood_process" type="ProgressBar" parent="."]
+offset_left = -37.0
+offset_top = 36.0
+offset_right = 40.0
+offset_bottom = 50.0
+rotation = -1.5708
+theme_override_font_sizes/font_size = 11
+theme_override_styles/background = SubResource("StyleBoxFlat_nef2n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0k3if")
+value = 100.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 19.0
+offset_right = 21.0
+offset_bottom = 39.0
+rotation = -1.57079
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "三角形"

@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://baiqgw1qlqiyg"]
+
+[ext_resource type="Shader" uid="uid://bjvr3508fd2pt" path="res://shaders/UI_Background.gdshader" id="1_chynj"]
+[ext_resource type="Script" uid="uid://dvyg7ustp7rt5" path="res://Scene/about.gd" id="1_ddgfs"]
+[ext_resource type="Texture2D" uid="uid://jtpd2lh7n1hk" path="res://pictures/enermy.png" id="3_whkc4"]
+[ext_resource type="Texture2D" uid="uid://cu1yh3uw0xck" path="res://pictures/enermy2.png" id="4_eggir"]
+[ext_resource type="Texture2D" uid="uid://bn8utannadpgw" path="res://pictures/boss.png" id="5_7f0ws"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhhed"]
+shader = ExtResource("1_chynj")
+
+[sub_resource type="Gradient" id="Gradient_j2h1x"]
+offsets = PackedFloat32Array(0, 0.467337, 1)
+colors = PackedColorArray(0.934222, 0.572876, 0.964844, 1, 0.980469, 0.860932, 0.654922, 1, 0.144531, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qmuwl"]
+gradient = SubResource("Gradient_j2h1x")
+
+[node name="about" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ddgfs")
+
+[node name="back" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_bhhed")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qmuwl")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(0.171875, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.709804)
+theme_override_font_sizes/font_size = 61
+text = "游戏说明"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enermy1" type="Node2D" parent="."]
+
+[node name="Enermy" type="Sprite2D" parent="enermy1"]
+position = Vector2(209, 196)
+scale = Vector2(2.02, 2.02)
+texture = ExtResource("3_whkc4")
+
+[node name="ColorRect" type="ColorRect" parent="enermy1"]
+offset_left = 191.0
+offset_top = 186.0
+offset_right = 226.0
+offset_bottom = 197.0
+color = Color(0.617188, 0.964111, 1, 1)
+
+[node name="Label" type="Label" parent="enermy1"]
+offset_left = 260.0
+offset_top = 162.0
+offset_right = 1035.0
+offset_bottom = 247.0
+theme_override_colors/font_color = Color(0.527344, 0.527344, 0.527344, 1)
+theme_override_font_sizes/font_size = 46
+text = "普通敌人，只可近战攻击"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enermy2" type="Node2D" parent="."]
+position = Vector2(0, 109)
+
+[node name="Enermy" type="Sprite2D" parent="enermy2"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+position = Vector2(209, 196)
+scale = Vector2(2.02, 2.02)
+texture = ExtResource("4_eggir")
+
+[node name="ColorRect" type="ColorRect" parent="enermy2"]
+offset_left = 191.0
+offset_top = 162.0
+offset_right = 226.0
+offset_bottom = 173.0
+
+[node name="Label" type="Label" parent="enermy2"]
+offset_left = 260.0
+offset_top = 162.0
+offset_right = 1035.0
+offset_bottom = 247.0
+theme_override_colors/font_color = Color(1, 0.617188, 0.617188, 1)
+theme_override_font_sizes/font_size = 46
+text = "进阶敌人，各方面能力得到提高"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enermy3" type="Node2D" parent="."]
+position = Vector2(0, 272)
+
+[node name="Enermy" type="Sprite2D" parent="enermy3"]
+modulate = Color(0.960938, 0.5, 1, 1)
+position = Vector2(209, 196)
+scale = Vector2(2.02, 2.02)
+texture = ExtResource("5_7f0ws")
+
+[node name="Label" type="Label" parent="enermy3"]
+offset_left = 260.0
+offset_top = 162.0
+offset_right = 1035.0
+offset_bottom = 247.0
+theme_override_colors/font_color = Color(1, 0.914063, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "boss，能力最强，还能够自我强化"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -113.0
+offset_right = 117.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "我已知晓，返回"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
